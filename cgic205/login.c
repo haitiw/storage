@@ -1,34 +1,103 @@
-ï»¿#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-//#include "sqlite3.h"
-#include "cgic.h"
+#include <stdio.h>   
+#include <stdlib.h>   
+#include <string.h>   
 
-#define N	64
+char name[64];   
+char pass[64];  
+  
+char* getcgidata(FILE* fp, char* requestmethod)   
+{   
+	char* input;   
+	int len;   
+	int size = 1024;   
+	int i = 0;   
+	  
+	if (!strcmp(requestmethod, "GET"))   {   
+		 input = getenv("QUERY_STRING");   
+		 return input;   
+	}   
+	else if (!strcmp(requestmethod, "POST"))   {   
+		 len = atoi(getenv("CONTENT_LENGTH"));   
+		 input = (char*)malloc(sizeof(char)*(size + 1));   
+		   
+		 if (len == 0)   {   
+			input[0] = '\0';   
+			return input;   
+		 }   
+		   
+		 while(1)   
+		 {   
+			input[i] = (char)fgetc(fp);   
+			if (i == size)   {   
+				 input[i+1] = '\0';   
+				 return input;   
+			}   										  
+			--len;   
+			if (feof(fp) || (!(len)))   {   
+				 i++;   
+				 input[i] = '\0';   
+				 return input;   
+			}   
+			i++;   
+						  
+		 }   
+	}   
+	return NULL;  
+}	
 
-char name[N] = {0};
-char passwd[N] = {0};
-	
-int cgiMain()
+void unencode_for_name_pass(char *input)
 {
-	cgiFormStringNoNewlines("username", name, N);
-	cgiFormStringNoNewlines("password", passwd, N);
-
-	cgiHeaderContentType("text/html");
-	fprintf(cgiOut, "<HTML>\n");
-	fprintf(cgiOut, "<HTML><HEAD>\n");
-	fprintf(cgiOut, "<TITLE>ç™»å½•æç¤º</TITLE></HEAD>\n");
-
-	if((strcmp(name,"chuangke") == 0)&&(strcmp(passwd,"123") == 0))
+	int i = 0;   
+	int j = 0;   
+	
+		// ÎÒÃÇ»ñÈ¡µÄinput×Ö·û´®¿ÉÄÜÏñÈçÏÂµÄĞÎÊ½   
+		// Username="admin"&Password="aaaaa"   
+		// ÆäÖĞ"Username="ºÍ"&Password="¶¼ÊÇ¹Ì¶¨µÄ   
+		// ¶ø"admin"ºÍ"aaaaa"¶¼ÊÇ±ä»¯µÄ£¬Ò²ÊÇÎÒÃÇÒª»ñÈ¡µÄ   
+		  
+		// Ç°Ãæ9¸ö×Ö·ûÊÇUserName=   
+		// ÔÚ"UserName="ºÍ"&"Ö®¼äµÄÊÇÎÒÃÇÒªÈ¡³öÀ´µÄÓÃ»§Ãû   	
+	for ( i = 9; i < (int)strlen(input); i++ )  {   
+		 if (input[i] == '&')   {   
+			name[j] = '\0';   
+			break;   
+		 }                                       
+		 name[j++] = input[i];   
+	}   
+   
+	// Ç°Ãæ9¸ö×Ö·û + "&Password="10¸ö×Ö·û + UsernameµÄ×Ö·ûÊı   
+	// ÊÇÎÒÃÇ²»ÒªµÄ£¬¹ÊÊ¡ÂÔµô£¬²»¿½±´   
+	for ( i = 19 + strlen(name), j = 0; i < (int)strlen(input); i++ ){   
+		 pass[j++] = input[i];   
+	}   
+	pass[j] = '\0';   	
+	
+	//printf("Your Username is %s<br> Your Password is %s<br> \n", name, pass);   
+	
+	printf("Content-type: text/html\n\n");   //¸æËß±àÒëÆ÷£¬ÓÃhtmlÓï·¨À´½âÎö
+	if((strcmp(name,"Romeo") == 0)&&(strcmp(pass,"123") == 0))
 	{
-		fprintf(cgiOut, "<BODY>");
-		fprintf(cgiOut, "<H1>%s<Hi>","Login OK!");	
-		fprintf(cgiOut, "<H1>Welcome to %s<Hi>",name);			
-		fprintf(cgiOut, "<meta http-equiv=\"refresh\" content=\"5;url=http://192.168.1.100/index.html\">"); //æˆåŠŸè·³è½¬çš„html
+		printf("<script language='javascript'>document.location = 'http://192.168.31.150/choose.html'</script>"); //×Ô¶¯Ìø×ªµ½Õâ¸öÒ³Ãæ	
 	}
 	else{
-		fprintf(cgiOut, "<H1>%s<Hi>","Login error!");	
+		printf("ÓÃ»§Ãû»òÃÜÂë´íÎó<br><br>");  
+		//exit(-1);
 	}
-	return 0;
 }
+
+int main()   
+{   
+	char *input;   
+	char *req_method;   
+ 
+	printf("Content-type: text/html\n\n");   //¸æËß±àÒëÆ÷£¬ÓÃhtmlÓï·¨À´½âÎö
+	printf("The following is query reuslt:<br><br>");   
+
+	req_method = getenv("REQUEST_METHOD");   
+	input = getcgidata(stdin, req_method);   //»ñÈ¡URL ±àÂëµÄÊı¾İ
+	
+	unencode_for_name_pass(input);   //½âÂë£¬²¢ÅĞ¶ÏÓÃ»§Ãû£¬ÃÜÂë,Èç¹ûÕıÈ·£¬Ìø×ªÖÁÑ¡Ôñ²Ö¿â½çÃæ£¬·ñÔòÌáÊ¾´íÎó	
+	return 0;   
+}   
+   
+			

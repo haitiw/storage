@@ -46,6 +46,14 @@ int main(int argc, const char *argv[]) {
     pthread_create(&tid_buzzer, NULL, pthread_buzzer, NULL);
     pthread_create(&tid_led, NULL, pthread_led, NULL);
 
+	pthread_join(tid_client_request,NULL);  printf ("pthread1\n");
+	pthread_join(tid_refresh,NULL);         printf ("pthread2\n");
+	pthread_join(tid_sqlite,NULL);			printf ("pthread3\n");
+	pthread_join(tid_transfer,NULL);		printf ("pthread4\n");
+	pthread_join(tid_sms,NULL);				printf ("pthread5\n");
+	pthread_join(tid_buzzer,NULL);			printf ("pthread6\n");
+	pthread_join(tid_led,NULL);				printf ("pthread7\n");
+
     sigaction(SIGINT, &act, NULL); // 设置SIGINT信号的处理函数为handle
 }
 
