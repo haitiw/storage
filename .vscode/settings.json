@@ -1,0 +1,6 @@
+{
+    "clangd.path": "/home/siri/Linux_4412/clangd_16.0.2/bin/clangd",
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder} --background-index --completion-style=detailed --header-insertion=never --log=info"
+    ]
+}

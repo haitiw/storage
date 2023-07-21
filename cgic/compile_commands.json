@@ -1,0 +1,14 @@
+[
+  {
+    "arguments": [
+      "/home/siri/Linux_4412/toolchain/gcc-4.6.4-arm-none-linux-gnueabihf/bin//arm-none-linux-gnueabi-gcc",
+      "-c",
+      "-o",
+      "cgi_buzzer.cgi",
+      "cgi_buzzer.c"
+    ],
+    "directory": "/home/siri/Linux_4412/storage/cgic",
+    "file": "/home/siri/Linux_4412/storage/cgic/cgi_buzzer.c",
+    "output": "/home/siri/Linux_4412/storage/cgic/cgi_buzzer.cgi"
+  }
+]

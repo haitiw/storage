@@ -1,23 +1,20 @@
-ifeq ($(KERNELRELEASE),)
+CROSS_COMPILE=arm-none-linux-gnueabi-
+CC=$(CROSS_COMPILE)gcc
+CFLAGS= -c -g
+#LDFLAGS= -lpthread -L ./lib -lsqlite3
+LDFLAGS= -lpthread
 
-ifeq ($(ARCH),arm)
-KERNELDIR ?= /home/siri/Linux_4412/linux-3.14
-ROOTFS ?= /home/siri/Linux_4412/rootfs
-else
-KERNELDIR ?= /lib/modules/$(shell uname -r)/build
-endif
-PWD := $(shell pwd)
+OBJS=main.o data_global.o pthread_transfer.o \
+	 pthread_client_request.o pthread_buzzer.o pthread_led.o\
+	 pthread_sqlite.o \
+	 pthread_refresh.o pthread_sms.o
 
-modules:
-	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+monitor_obj :$(OBJS)
+	$(CC) -o $@ $^ $(LDFLAGS)
+	mv *o ./obj
+$(OBJS):%.o:%.c
+	$(CC) $(CFLAGS) $< -o $@
 
-modules_install:
-	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules INSTALL_MOD_PATH=$(ROOTFS) modules_install
-
+.PHONY:clean
 clean:
-	rm -rf  *.o  *.ko  .*.cmd  *.mod.*  modules.order  Module.symvers   .tmp_versions
-
-else
-obj-m += fs4412_led.o
-
-endif
+	rm *.o monitor_obj -rf 

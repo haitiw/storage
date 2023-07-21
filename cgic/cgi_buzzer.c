@@ -16,73 +16,56 @@
 #include <errno.h>
 #include "../dev/chardev.h"
 
-#define LED_DEVICE "/dev/chrdev0"
+#define BUZZER_DEVICE "/dev/buzzer1"
 #define MAX_BUFFER_SIZE PIPE_BUF
 
 int main(int argc, const char *argv[])
 {
 	int i = 0,j = 3;
 	int nread;
-	int led_control,led_state;
-	int led_fd,fifo_fd;
+	int buzzer_control;
+	int buzzer_fd,fifo_fd;
 	led_desc_t led;
 	char *data;
 
-	led_fd = open(LED_DEVICE,O_RDWR);
-	if(led_fd < 0){
+	buzzer_fd = open(BUZZER_DEVICE,O_RDWR);
+	if(buzzer_fd < 0){
 		printf("open failed !\n");
 	}
-	printf("open device success! led_fd: %d\n",led_fd);
+	printf("open device success! led_fd: %d\n",buzzer_fd);
 
 
     printf("Content-type: text/html;charset=utf-8\n\n");
     printf("<html>\n");
-    printf("<head><title>cgi control led web</title></head>\n");
+    printf("<head><title>cgi control buzzer web</title></head>\n");
     printf("<body>\n");
-    printf("<p>led is setted successful! you can watch the led's change</p>\n");
+    printf("<p>led is setted successful! you can watch the buzzer change</p>\n");
     //printf("<p><a herf=http://192.168.1.50/led.html>go back</a></p>\n");
-	printf("<a href=\"/led.html\">go back led control page </a>");
+	printf("<a href=\"/buzzer.html\">go back buzzer control page </a>");
 	printf("</body>\n");
 
     data = getenv("QUERY_STRING");   //getenv()读取环境变量的当前值的函数 
 
-    if(sscanf(data,"led_control=%d&led_state=%d",&led_control,&led_state)!=2)
+    if(sscanf(data,"buzzer_control=%d",&buzzer_control)!=1)
     {   //利用sscnaf（）函数的特点将环境变量分别提取出led_control和led_state这两个值
         printf("<p>please input right"); 
         printf("</p>");
     } 
-    printf("<p>led_control = %d,led_state =  %d</p>", led_control, led_state);
-    if(led_control < 2 || led_control > 5) { 
-        printf("<p>Please input 2<=led_control<=5!"); 
+    printf("<p>buzzer_control = %d</p>", buzzer_control);
+    if(buzzer_control < 0 || buzzer_control > 1) { 
+        printf("<p>Please input buzzer_control = 0 or 1!"); 
         printf("</p>");
     } 
-    if(led_state>1) {
-        printf("<p>Please input 0<=led_state<=1!"); 
-        printf("</p>"); 
+
+	led.led_num   = buzzer_control;
+	
+	if(buzzer_control == 0){
+		ioctl(buzzer_fd,FS_BUZZER_OFF,&led);
+    } else if (buzzer_control == 1) {
+        ioctl(buzzer_fd, FS_BUZZER_ON, &led);
     }
 
-	led.led_num   = led_control;
-	led.led_state = led_state;
-	
-	if(led.led_state == 0){
-		ioctl(led_fd,FS_LED_OFF,&led);
-	}else if(led.led_state == 1){
-		ioctl(led_fd,FS_LED_ON,&led);
-	}else if(led.led_state == 2){
-		while(j --){
-			for(i = 2; i <= 5; i ++ ){
-				led.led_num = i;
-				led.led_state = 0;
-				ioctl(led_fd,FS_LED_OFF,&led);
-				usleep(500000);
-				led.led_state = 1;
-				ioctl(led_fd,FS_LED_ON,&led);
-				usleep(500000);
-			}
-		}
-	}
-
-	close(led_fd);
+        close(buzzer_fd);
     printf("</html>\n");
 
 	return 0;

@@ -1,1 +1,119 @@
-[]
+[
+  {
+    "arguments": [
+      "/home/siri/Linux_4412/toolchain/gcc-4.6.4-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabi-gcc",
+      "-c",
+      "-g",
+      "-o",
+      "main.o",
+      "main.c"
+    ],
+    "directory": "/home/siri/Linux_4412/storage",
+    "file": "/home/siri/Linux_4412/storage/main.c",
+    "output": "/home/siri/Linux_4412/storage/main.o"
+  },
+  {
+    "arguments": [
+      "/home/siri/Linux_4412/toolchain/gcc-4.6.4-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabi-gcc",
+      "-c",
+      "-g",
+      "-o",
+      "data_global.o",
+      "data_global.c"
+    ],
+    "directory": "/home/siri/Linux_4412/storage",
+    "file": "/home/siri/Linux_4412/storage/data_global.c",
+    "output": "/home/siri/Linux_4412/storage/data_global.o"
+  },
+  {
+    "arguments": [
+      "/home/siri/Linux_4412/toolchain/gcc-4.6.4-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabi-gcc",
+      "-c",
+      "-g",
+      "-o",
+      "pthread_transfer.o",
+      "pthread_transfer.c"
+    ],
+    "directory": "/home/siri/Linux_4412/storage",
+    "file": "/home/siri/Linux_4412/storage/pthread_transfer.c",
+    "output": "/home/siri/Linux_4412/storage/pthread_transfer.o"
+  },
+  {
+    "arguments": [
+      "/home/siri/Linux_4412/toolchain/gcc-4.6.4-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabi-gcc",
+      "-c",
+      "-g",
+      "-o",
+      "pthread_client_request.o",
+      "pthread_client_request.c"
+    ],
+    "directory": "/home/siri/Linux_4412/storage",
+    "file": "/home/siri/Linux_4412/storage/pthread_client_request.c",
+    "output": "/home/siri/Linux_4412/storage/pthread_client_request.o"
+  },
+  {
+    "arguments": [
+      "/home/siri/Linux_4412/toolchain/gcc-4.6.4-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabi-gcc",
+      "-c",
+      "-g",
+      "-o",
+      "pthread_buzzer.o",
+      "pthread_buzzer.c"
+    ],
+    "directory": "/home/siri/Linux_4412/storage",
+    "file": "/home/siri/Linux_4412/storage/pthread_buzzer.c",
+    "output": "/home/siri/Linux_4412/storage/pthread_buzzer.o"
+  },
+  {
+    "arguments": [
+      "/home/siri/Linux_4412/toolchain/gcc-4.6.4-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabi-gcc",
+      "-c",
+      "-g",
+      "-o",
+      "pthread_led.o",
+      "pthread_led.c"
+    ],
+    "directory": "/home/siri/Linux_4412/storage",
+    "file": "/home/siri/Linux_4412/storage/pthread_led.c",
+    "output": "/home/siri/Linux_4412/storage/pthread_led.o"
+  },
+  {
+    "arguments": [
+      "/home/siri/Linux_4412/toolchain/gcc-4.6.4-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabi-gcc",
+      "-c",
+      "-g",
+      "-o",
+      "pthread_sqlite.o",
+      "pthread_sqlite.c"
+    ],
+    "directory": "/home/siri/Linux_4412/storage",
+    "file": "/home/siri/Linux_4412/storage/pthread_sqlite.c",
+    "output": "/home/siri/Linux_4412/storage/pthread_sqlite.o"
+  },
+  {
+    "arguments": [
+      "/home/siri/Linux_4412/toolchain/gcc-4.6.4-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabi-gcc",
+      "-c",
+      "-g",
+      "-o",
+      "pthread_refresh.o",
+      "pthread_refresh.c"
+    ],
+    "directory": "/home/siri/Linux_4412/storage",
+    "file": "/home/siri/Linux_4412/storage/pthread_refresh.c",
+    "output": "/home/siri/Linux_4412/storage/pthread_refresh.o"
+  },
+  {
+    "arguments": [
+      "/home/siri/Linux_4412/toolchain/gcc-4.6.4-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabi-gcc",
+      "-c",
+      "-g",
+      "-o",
+      "pthread_sms.o",
+      "pthread_sms.c"
+    ],
+    "directory": "/home/siri/Linux_4412/storage",
+    "file": "/home/siri/Linux_4412/storage/pthread_sms.c",
+    "output": "/home/siri/Linux_4412/storage/pthread_sms.o"
+  }
+]
