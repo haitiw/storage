@@ -1,0 +1,1 @@
+cmd_/home/siri/Linux_4412/storage/dev/buzzerdev.mod := printf '%s\n'   buzzerdev.o | awk '!x[$$0]++ { print("/home/siri/Linux_4412/storage/dev/"$$0) }' > /home/siri/Linux_4412/storage/dev/buzzerdev.mod

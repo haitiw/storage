@@ -1,0 +1,1 @@
+cmd_/home/siri/Linux_4412/storage/dev/buzzerdev.ko := arm-none-linux-gnueabi-ld -EL -r  -T /home/siri/Linux_4412/linux-3.14/scripts/module-common.lds --build-id  -o /home/siri/Linux_4412/storage/dev/buzzerdev.ko /home/siri/Linux_4412/storage/dev/buzzerdev.o /home/siri/Linux_4412/storage/dev/buzzerdev.mod.o

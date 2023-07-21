@@ -19,6 +19,12 @@ unsigned int  major ;
 struct class *cls;
 struct device *dev;
 
+#define GPX2CON 0x11000c40
+#define GPX2DAT 0x11000c44
+#define GPX1CON 0x11000c20
+#define GPX1DAT 0x11000c24
+#define GPF3CON 0x114001e0
+#define GPF3DAT 0x114001e4
 
 void __iomem * gpx2con_vir;
 void __iomem * gpx2dat_vir;
@@ -136,13 +142,13 @@ const struct file_operations fops = {
 
 void gpio_ioremap(void)
 {
-	gpx2con_vir = ioremap(GPX2.CON,8);//gpx2con 4字节 gpx2dat4字节
+	gpx2con_vir = ioremap(GPX2CON,8);//gpx2con 4字节 gpx2dat4字节
 	gpx2dat_vir = gpx2con_vir + 4;
 	
-	gpx1con_vir = ioremap(GPX1.CON,8);
+	gpx1con_vir = ioremap(GPX1CON,8);
 	gpx1dat_vir = gpx1con_vir + 4;
 	
-	gpf3con_vir = ioremap(GPF3.CON,8);
+	gpf3con_vir = ioremap(GPF3CON,8);
 	gpf3dat_vir = gpf3con_vir + 4;
 	
 	writel((readl(gpx2con_vir) & ~(0XF<< 28))| (0x1 << 28),gpx2con_vir);

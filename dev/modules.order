@@ -1,1 +1,2 @@
-kernel//home/siri/Linux_4412/storage/leddev.ko
+kernel//home/siri/Linux_4412/storage/dev/leddev.ko
+kernel//home/siri/Linux_4412/storage/dev/buzzerdev.ko

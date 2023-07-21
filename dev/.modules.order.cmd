@@ -1,0 +1,1 @@
+cmd_/home/siri/Linux_4412/storage/dev/modules.order := {   echo /home/siri/Linux_4412/storage/dev/leddev.ko;   echo /home/siri/Linux_4412/storage/dev/buzzerdev.ko; :; } | awk '!x[$$0]++' - > /home/siri/Linux_4412/storage/dev/modules.order

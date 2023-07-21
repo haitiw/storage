@@ -1,0 +1,1 @@
+cmd_/home/siri/Linux_4412/storage/dev/leddev.ko := arm-none-linux-gnueabi-ld -EL -r  -T /home/siri/Linux_4412/linux-3.14/scripts/module-common.lds --build-id  -o /home/siri/Linux_4412/storage/dev/leddev.ko /home/siri/Linux_4412/storage/dev/leddev.o /home/siri/Linux_4412/storage/dev/leddev.mod.o

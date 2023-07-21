@@ -19,5 +19,6 @@ clean:
 
 else
 obj-m += leddev.o
+obj-m += buzzerdev.o
 
 endif

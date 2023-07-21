@@ -1,0 +1,1 @@
+cmd_/home/siri/Linux_4412/storage/dev/Module.symvers := sed 's/ko$$/o/' /home/siri/Linux_4412/storage/dev/modules.order | scripts/mod/modpost -m -a  -o /home/siri/Linux_4412/storage/dev/Module.symvers -e -i Module.symvers   -T -
